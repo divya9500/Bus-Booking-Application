@@ -186,59 +186,42 @@ public class BusApp {
                  count[k] = c2;
              }}}
  }
-    public static void filterting(){
+  
+  //Filterting
+  public static void filterting(){
+        LinkedHashMap<String,Integer> hm=new LinkedHashMap<String, Integer>();
         available();
-        String sc[]={"Ac Seater:","Non Ac Seater:","Ac Sleeper:","Non Ac Sleeper:"};
-        int arrcount[]={count[0],count[1],count[4],count[5]};
-        int max=0;String max1="";
-        for (int i = 0; i <arrcount.length; i++) {
-            for (int j = i + 1; j < arrcount.length; j++) {
-                if (arrcount[i] == arrcount[j]) {
 
-                if (sc[i].equals("Ac Seater:") && sc[j].equals("Ac Sleeper:") || (sc[i].equals("Non Ac Seater:") && sc[j].equals("Non Ac Sleeper:")) ||
-                (sc[i].equals("Non Ac Seater:") && sc[j].equals("Ac Seater:")) || (sc[i].equals("Non Ac Sleeper:") && sc[j].equals("Ac Sleeper:")) ||
-                (sc[i].equals("Non Ac Seater:") && sc[j].equals("Ac Sleeper:")) || (sc[i].equals("Non Ac Sleeper:") && sc[j].equals("Ac Seater:"))) {
-                        max1 = sc[i];
-                        sc[i] = sc[j];
-                        sc[j] = max1;
-                    }
-                } else if (arrcount[i] < arrcount[j]) {
-                    max1 = sc[i];sc[i] = sc[j];max = arrcount[i];
-                    arrcount[i] = arrcount[j];arrcount[j] = max;sc[j] = max1;
-                }
-            }
-            System.out.println(sc[i] + arrcount[i]);
-        }
+        hm.put("AcSleeperBus", count[4]);
+        hm.put("AcSleeperBus2",count[6]);
+        hm.put("AcSeaterBus",count[0]);
+        hm.put("AcSeaterBus2", count[2]);
+
+        hm.put("NonAcSleeperBus",count[5]);
+        hm.put("NonAcSleeperBus2",count[7]);
+        hm.put("NonAcSeaterBus",count[1]);
+        hm.put("NonAcSeaterBus2",count[3]);
+
+        Set<Map.Entry<String,Integer>> set=hm.entrySet();
+        List<Map.Entry<String, Integer>> list =
+                new ArrayList(set);
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>(){
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                if (o1.getValue() < o2.getValue())
+                    return 1;
+                if (o1.getValue() > o2.getValue())
+                    return -1;
+               else
+                    return 0;
+
+            }}
+        );
+        for(var c:list)
+            System.out.println(c);
         System.out.println("------------------------");
     }
-\\filterting 
-    public static void filterting1(){
-        available();
-        String sc[]={"Ac Seater 2:","Non Ac Seater 2:","Ac Sleeper 2:","Non Ac Sleeper 2:"};
-        int arrcount[]={count[2],count[3],count[6],count[7]};
 
-        int max=0;String max1="";
-        for (int i = 0; i <arrcount.length; i++) {
-            for (int j = i + 1; j < arrcount.length; j++) {
-                if (arrcount[i] == arrcount[j]) {
-
-                    if (sc[i].equals("Ac Seater 2:") && sc[j].equals("Ac Sleeper 2:") || (sc[i].equals("Non Ac Seater 2:") && sc[j].equals("Non Ac Sleeper 2:")) ||
-                          sc[i].equals("Non Ac Seater 2:") && sc[j].equals("Ac Seater 2:")) || (sc[i].equals("Non Ac Sleeper 2:") &sc[j].equals("Ac Sleeper 2:")) ||
-                         (sc[i].equals("Non Ac Seater 2:") && sc[j].equals("Ac Sleeper 2:")) || (sc[i].equals("Non Ac Sleeper 2:") && sc[j].equals("Ac Seater 2:")))                    {
-                        max1 = sc[i];
-                        sc[i] = sc[j];
-                        sc[j] = max1;
-                    }
-
-                } else if (arrcount[i] < arrcount[j]) {
-                    max1 = sc[i];sc[i] = sc[j];max = arrcount[i];
-                    arrcount[i] = arrcount[j];arrcount[j] = max;sc[j] = max1;
-                }
-            }
-            System.out.println(sc[i] + arrcount[i]);
-        }
-        System.out.println("------------------------");
-    }
 }
 
 
